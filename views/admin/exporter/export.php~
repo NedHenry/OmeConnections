@@ -1,0 +1,11 @@
+<?php
+header('Content-Type: application/octet-stream');
+header("Content-Disposition: attachment; filename=\"testname.txt\"");
+
+if(isset($_REQUEST['test']))
+  echo 'request:'.$_REQUEST['test'];
+if(isset($test))
+  echo 'var:'.$test;
+
+?>
+<br>andandand some more stuff in this file that's getting downloaded!

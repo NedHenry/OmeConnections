@@ -1,0 +1,44 @@
+<?php
+
+Abstract Class OmeConnections_Abstract_Module
+{
+  protected $supports_push = 0;
+  protected $supports_pull = 0;
+  abstract public function connect($records);
+  abstract public function disconnect($records);
+
+  public function push($records)
+  {
+    echo "remote push not supported on this module";
+    return(-1);
+  }
+
+  public function pull($records)
+  {
+    echo "remote push not supported on this module";
+    return(-1);
+  }
+
+  public function getCredentialForm($records)
+  {
+    return("default OmeConnect module credential form");
+  }
+
+  public function processCredentialForm($records)
+  {
+    echo("processing credential form");
+  }
+
+  public function getRemoteSelectorForm($records)
+  {
+    return("default OmeConnect module credential form");
+  }
+
+  public function processRemoteSelectorForm($records)
+  {
+    echo("processing remote selector form");
+  }
+
+}
+
+?>

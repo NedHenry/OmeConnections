@@ -1,0 +1,14 @@
+<?php
+/**
+ * The export controller class.
+ *
+ * @package OmeConnections
+ */
+ 
+class OmeConnections_exportController extends Omeka_Controller_AbstractActionController
+{
+    public function exportAction()
+    {
+      //action goes here		
+    }
+}
