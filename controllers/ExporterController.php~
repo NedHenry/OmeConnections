@@ -10,9 +10,9 @@ class OmeConnections_exporterController extends Omeka_Controller_AbstractActionC
     public function exportAction()
     {
       $request = $this->getRequest();
-      $test = $request->getParam('test');
+      $test = $request->getParam('itemID');
       $view = get_view();
-      $view->test = $test;
+      $view->itemID = $test;
       //action goes here		
     }
 

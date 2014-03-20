@@ -112,9 +112,8 @@ class OmeConnectionsPlugin extends Omeka_Plugin_AbstractPlugin
       //REPLACE THIS WITH APPROPRIATE FUNCTION!!!!
       $item = get_current_record('item');
       $itemID = $item->id;
-      //if(isset($_GET['export']) && $_GET['export']=='true')
-	//echo "exportation!";
-      $downloadLink = url("ome-connections/exporter/export/itemID/".$itemID);
+
+      $downloadLink = url("ome-connections/exporter/export/moduleName/METS/itemID/".$itemID);
       //echo $downloadLink;
       ?>
       <a href="<?php echo $downloadLink;?>" target="_blank">

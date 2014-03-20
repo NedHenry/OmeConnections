@@ -16,7 +16,6 @@ class OmeConnectionsPlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * @var array Hooks for the plugin.
      */
-  //TODO add route + controller for download
     protected $_hooks = array('install', 'uninstall', 'upgrade', 'initialize',
 			      'config_form', 'config','admin_items_show','admin_head');
     /**
@@ -86,9 +85,11 @@ class OmeConnectionsPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookInitialize()
     {
-      $physical = dirname(__FILE__);
+      //$physical = dirname(__FILE__);
+      //echo "HEY!!!".src(dirname(__FILE__));
+	       
       $view = get_view();
-      $view->addAssetPath($physical,str_replace('/Users/ned/webdev/','http://localhost/',$physical));
+      $view->addAssetPath(dirname(__FILE__),absolute_url("plugins/OmeConnections"));
     }
 
     /**
@@ -108,9 +109,12 @@ class OmeConnectionsPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function hookAdminItemsShow()
     {
-      if(isset($_GET['export']) && $_GET['export']=='true')
+      //REPLACE THIS WITH APPROPRIATE FUNCTION!!!!
+      $item = get_current_record('item');
+      $itemID = $item->id;
+      //if(isset($_GET['export']) && $_GET['export']=='true')
 	//echo "exportation!";
-      $downloadLink = "http://localhost/omeka-21/admin/ome-connections/exporter/export/test/poopiface";
+      $downloadLink = url("ome-connections/exporter/export/itemID/".$itemID);
       //echo $downloadLink;
       ?>
       <a href="<?php echo $downloadLink;?>" target="_blank">
