@@ -4,6 +4,8 @@ Class METS_module extends OmeConnections_Abstract_Module
 { 
   public static $name="METS";
 
+  public $force_download = true;
+
   public $supports_push = true;
   public $supports_pull = false;
 
@@ -61,10 +63,11 @@ Class METS_module extends OmeConnections_Abstract_Module
     $agents = $this->getAgents($item);
 
 
-    //UNCOMMENT THESE LINES TO FORCE DOWNLOAD
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="ITEM_'.$itemID.'_METS.xml"');
-
+    if($this->force_download)
+      {
+	header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename="ITEM_'.$itemID.'_METS.xml"');
+      }
     echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
 
     //UNCOMMENT THESE LINES TO OUTPUT HUMAN READABLE TEXT

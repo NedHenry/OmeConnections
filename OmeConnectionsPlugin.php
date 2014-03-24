@@ -17,11 +17,12 @@ class OmeConnectionsPlugin extends Omeka_Plugin_AbstractPlugin
      * @var array Hooks for the plugin.
      */
     protected $_hooks = array('install', 'uninstall', 'upgrade', 'initialize',
-			      'config_form', 'config','admin_items_show','admin_head');
+			      'config_form', 'config','admin_items_show',
+			      'admin_head,');
     /**
      * @var array Filters for the plugin.
      */
-    protected $_filters = array();
+    protected $_filters = array('action_contexts','response_contexts');
 
     /**
      * @var array Options and their default values.
@@ -54,6 +55,34 @@ class OmeConnectionsPlugin extends Omeka_Plugin_AbstractPlugin
 	installModule("csv");
 	
         $this->_installOptions();
+    }
+
+    /*
+     *Link new formats to associated views
+     */
+
+    public function filterResponseContexts($contexts)
+    {
+      //die('test!');
+      $contexts['METS'] = array('suffix' => 'mets',
+				'headers' => array('Content-Type' => 'text/xml')
+				);
+      return $contexts;
+
+    }
+
+
+    /*
+     * Add new formats to Omeka item output list
+     */
+
+    public function filterActionContexts($contexts, $args)
+    {
+      //die('test!');
+      //      if($args['controller'] instanceof ItemsController) {
+	$contexts['show'][] = 'METS';
+	//}
+      return $contexts;
     }
 
     /*
@@ -109,7 +138,7 @@ class OmeConnectionsPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function hookAdminItemsShow()
     {
-      //REPLACE THIS WITH APPROPRIATE FUNCTION!!!!
+      
       $item = get_current_record('item');
       $itemID = $item->id;
 
